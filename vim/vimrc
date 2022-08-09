@@ -1,0 +1,67 @@
+" Enable filetype support, supporting filetype-specific indentation, syntax
+" highlighting and other goodies.
+filetype plugin indent on
+
+" Enable syntax highlighting, overriding current color settings with defaults.
+syntax on
+
+set autoindent
+set autoread
+set backspace=indent,eol,start
+set completeopt=
+set encoding=utf-8
+set expandtab
+set fileformats=unix,dos
+set hidden
+set ignorecase
+set incsearch
+set lazyredraw
+set listchars=tab:>\ ,space:_
+set nojoinspaces
+set nowrap
+set ruler
+set scrolloff=5
+set shortmess+=I
+set sidescroll=5
+set sidescrolloff=5
+set smartcase
+set splitbelow
+set splitright
+set textwidth=80
+set virtualedit=all
+
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
+let c_space_errors = 1
+
+if has('gui_running')
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=L
+  set guioptions-=r
+
+  set renderoptions=type:directx
+  if has("win32")
+    set guifont=Cousine:h10
+  else
+    set guifont=Cousine\ 10
+  endif
+elseif has("win32")
+  set termguicolors
+endif
+
+silent! colorscheme midnight
+
+" Make <Esc> properly exit insert mode in vertical block mode.
+inoremap <C-c> <Esc>
+
+nnoremap <Leader>p "*p
+nnoremap <Leader>y "*y
+nnoremap <silent> <Leader><Leader> :nohl<CR>
+nnoremap <silent> <Leader>q :set list!<CR>
+nnoremap j gj
+nnoremap k gk
+
+vnoremap <Leader>y "*y

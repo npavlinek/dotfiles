@@ -1,0 +1,10 @@
+setlocal cindent
+setlocal cinoptions=l1,t0,g0
+setlocal expandtab
+setlocal formatoptions-=c
+setlocal formatoptions-=o
+setlocal formatoptions-=r
+setlocal makeprg=build
+setlocal shiftwidth=3
+setlocal softtabstop=3
+setlocal tabstop=3
