@@ -54,6 +54,14 @@ endif
 
 silent! colorscheme midnight
 
+function! EscapeHtml()
+  silent s/"/\&quot;/eg
+  silent s/&/\&amp;/eg
+  silent s/'/\&#039;/eg
+  silent s/</\&lt;/eg
+  silent s/>/\&gt;/eg
+endfunction
+
 " Make <Esc> properly exit insert mode in vertical block mode.
 inoremap <C-c> <Esc>
 
@@ -64,4 +72,5 @@ nnoremap <silent> <Leader>q :set list!<CR>
 nnoremap j gj
 nnoremap k gk
 
+vnoremap <Leader>h :call EscapeHtml()<CR>
 vnoremap <Leader>y "*y
