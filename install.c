@@ -9,29 +9,22 @@
 
 #define ArraySize(array) (sizeof(array) / sizeof(array[0]))
 
-enum SymLinkResult
-{
+typedef enum {
    SYM_LINK_RESULT_OK,
    SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE,
    SYM_LINK_RESULT_ALREADY_EXISTS,
    SYM_LINK_RESULT_UNKNOWN
-};
-typedef enum SymLinkResult SymLinkResult;
+} SymLinkResult;
 
-typedef struct ConfigFile ConfigFile;
-struct ConfigFile
-{
+typedef struct {
    const char * source;
-   struct
-   {
+   struct {
       const char * linux;
       const char * windows;
-   }
-   destination;
-};
+   } destination;
+} ConfigFile;
 
-static ConfigFile config_files[] =
-{
+static ConfigFile config_files[] = {
    {.source = "emacs", .destination = {.linux = "$HOME/.emacs.d", .windows = "%APPDATA%\\.emacs.d"}},
    {.source = "gitconfig", .destination = {.linux = "$HOME/.gitconfig", .windows = "%USERPROFILE%\\.gitconfig"}},
    {.source = "openbox", .destination = {.linux = "$HOME/.config/openbox", .windows = NULL}},
@@ -81,8 +74,7 @@ static SymLinkResult CreateSymLink(const char * source, const char * destination
    DWORD symlink_flags = SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE;
    if (is_directory)
       symlink_flags |= SYMBOLIC_LINK_FLAG_DIRECTORY;
-   if (CreateSymbolicLinkA(destination, source, symlink_flags) == 0)
-   {
+   if (CreateSymbolicLinkA(destination, source, symlink_flags) == 0) {
       const DWORD error = GetLastError();
       if (error == ERROR_PRIVILEGE_NOT_HELD)
          return SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE;
@@ -132,8 +124,7 @@ static bool IsDirectory(const char * path)
 static SymLinkResult CreateSymLink(const char * source, const char * destination, bool is_directory)
 {
    (void)is_directory;
-   if (symlink(source, destination) == -1)
-   {
+   if (symlink(source, destination) == -1) {
       if (errno == EACCES)
          return SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE;
       else if (errno == EEXIST)
@@ -150,8 +141,7 @@ static SymLinkResult CreateSymLink(const char * source, const char * destination
 
 int main(void)
 {
-   for (size_t i = 0; i < ArraySize(config_files); ++i)
-   {
+   for (size_t i = 0; i < ArraySize(config_files); ++i) {
       const ConfigFile file = config_files[i];
 
       char source_abs_path[MAXIMUM_PATH_LENGTH] = {0};
@@ -169,24 +159,18 @@ int main(void)
 
       const bool is_directory = IsDirectory(source_abs_path);
       const SymLinkResult result = CreateSymLink(source_abs_path, destination_abs_path, is_directory);
-      if (result == SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE)
-      {
-         fputs("error: cannot create a symbolic link because of insufficient privileges, either run this program as an administrator or enable Developer Mode in Windows 10", stderr);
+      if (result == SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE) {
+         fprintf(stderr, "error: cannot create a symbolic link because of insufficient privileges, either run this program as an administrator or enable Developer Mode in Windows 10\n");
          exit(1);
-      }
-      else if (result == SYM_LINK_RESULT_ALREADY_EXISTS)
-      {
+      } else if (result == SYM_LINK_RESULT_ALREADY_EXISTS) {
          if (is_directory)
             fprintf(stderr, "warning: directory already exists at %s\n", destination_abs_path);
          else
             fprintf(stderr, "warning: file already exists at %s\n", destination_abs_path);
-      }
-      else if (result == SYM_LINK_RESULT_UNKNOWN)
-      {
-         fputs("error: please debug me", stderr);
+      } else if (result == SYM_LINK_RESULT_UNKNOWN) {
+         fprintf(stderr, "error: please debug me\n");
          exit(1);
-      }
-      else
+      } else
          printf("%s -> %s\n", source_abs_path, destination_abs_path);
    }
 }
