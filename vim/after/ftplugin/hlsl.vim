@@ -1,6 +1,6 @@
 setlocal cindent
 setlocal cinoptions=t0
 setlocal expandtab
-setlocal shiftwidth=3
-setlocal softtabstop=3
-setlocal tabstop=3
+setlocal shiftwidth=4
+setlocal softtabstop=4
+setlocal tabstop=4
