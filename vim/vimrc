@@ -15,6 +15,7 @@ set fileformats=unix,dos
 set hidden
 set ignorecase
 set incsearch
+set laststatus=2
 set lazyredraw
 set listchars=tab:>\ ,space:_
 set nojoinspaces
