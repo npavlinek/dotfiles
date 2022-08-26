@@ -7,39 +7,39 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define ArraySize(array) (sizeof(array) / sizeof(array[0]))
+#define array_size(array) (sizeof(array) / sizeof(array[0]))
 
 typedef enum {
-    SYM_LINK_RESULT_OK,
-    SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE,
-    SYM_LINK_RESULT_ALREADY_EXISTS,
-    SYM_LINK_RESULT_UNKNOWN
-} SymLinkResult;
+  SYMLINK_RESULT_TYPE_OK,
+  SYMLINK_RESULT_TYPE_INSUFFICIENT_PRIVILEGE,
+  SYMLINK_RESULT_TYPE_ALREADY_EXISTS,
+  SYMLINK_RESULT_TYPE_UNKNOWN
+} symlink_result_type;
 
 typedef struct {
-    const char * source;
-    struct {
-        const char * linux;
-        const char * windows;
-    } destination;
-} ConfigFile;
+  const char *src;
+  struct {
+    const char *linux;
+    const char *windows;
+  } dest;
+} config_file;
 
-static ConfigFile config_files[] = {
-    {.source = "emacs", .destination = {.linux = "$HOME/.emacs.d", .windows = "%APPDATA%\\.emacs.d"}},
-    {.source = "gitconfig", .destination = {.linux = "$HOME/.gitconfig", .windows = "%USERPROFILE%\\.gitconfig"}},
-    {.source = "openbox", .destination = {.linux = "$HOME/.config/openbox", .windows = NULL}},
-    {.source = "vim", .destination = {.linux = "$HOME/.vim", .windows = "%USERPROFILE%\\vimfiles"}},
-    {.source = "xinitrc", .destination = {.linux = "$HOME/.xinitrc", .windows = NULL}}
+static config_file config_files[] = {
+  {.src = "emacs", .dest = {.linux = "$HOME/.emacs.d", .windows = "%APPDATA%\\.emacs.d"}},
+  {.src = "gitconfig", .dest = {.linux = "$HOME/.gitconfig", .windows = "%USERPROFILE%\\.gitconfig"}},
+  {.src = "openbox", .dest = {.linux = "$HOME/.config/openbox", .windows = NULL}},
+  {.src = "vim", .dest = {.linux = "$HOME/.vim", .windows = "%USERPROFILE%\\vimfiles"}},
+  {.src = "xinitrc", .dest = {.linux = "$HOME/.xinitrc", .windows = NULL}}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 // Required platform API
 ////////////////////////////////////////////////////////////////////////////////
 
-static void GetAbsolutePathToSource(const char * source, char * buffer, unsigned int buffer_size);
-static void GetAbsolutePathToDestination(const char * destination, char * buffer, unsigned int buffer_size);
-static bool IsDirectory(const char * path);
-static SymLinkResult CreateSymLink(const char * source, const char * destination, bool is_directory);
+static void get_absolute_path_to_src(const char *src, char *buf, unsigned int buf_size);
+static void get_absolute_path_to_dest(const char *dest, char *buf, unsigned int buf_size);
+static bool is_directory(const char *path);
+static symlink_result_type create_symlink(const char *src, const char *dest, bool is_directory);
 
 #ifdef _WIN32
 
@@ -50,38 +50,42 @@ static SymLinkResult CreateSymLink(const char * source, const char * destination
 
 #define MAXIMUM_PATH_LENGTH MAX_PATH
 
-static void GetAbsolutePathToSource(const char * source, char * buffer, unsigned int buffer_size) {
-    const DWORD result = GetFullPathNameA(source, buffer_size, buffer, NULL);
-    assert(result != 0);
+static void get_absolute_path_to_src(const char *src, char *buf, unsigned int buf_size)
+{
+  const DWORD result = GetFullPathNameA(src, buf_size, buf, NULL);
+  assert(result != 0);
 }
 
-static void GetAbsolutePathToDestination(const char * destination, char * buffer, unsigned int buffer_size) {
-    const DWORD result = ExpandEnvironmentStringsA(destination, buffer, buffer_size);
-    assert(result != 0);
+static void get_absolute_path_to_dest(const char *dest, char *buf, unsigned int buf_size)
+{
+  const DWORD result = ExpandEnvironmentStringsA(dest, buf, buf_size);
+  assert(result != 0);
 }
 
-static bool IsDirectory(const char * path) {
-    const DWORD result = GetFileAttributesA(path);
-    assert(result != INVALID_FILE_ATTRIBUTES);
-    return result & FILE_ATTRIBUTE_DIRECTORY;
+static bool is_directory(const char *path)
+{
+  const DWORD result = GetFileAttributesA(path);
+  assert(result != INVALID_FILE_ATTRIBUTES);
+  return result & FILE_ATTRIBUTE_DIRECTORY;
 }
 
-static SymLinkResult CreateSymLink(const char * source, const char * destination, bool is_directory) {
-    DWORD symlink_flags = SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE;
-    if (is_directory) {
-        symlink_flags |= SYMBOLIC_LINK_FLAG_DIRECTORY;
+static symlink_result_type create_symlink(const char *src, const char *dest, bool is_directory)
+{
+  DWORD symlink_flags = SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE;
+  if (is_directory) {
+    symlink_flags |= SYMBOLIC_LINK_FLAG_DIRECTORY;
+  }
+  if (CreateSymbolicLinkA(dest, src, symlink_flags) == 0) {
+    const DWORD error = GetLastError();
+    if (error == ERROR_PRIVILEGE_NOT_HELD) {
+      return SYMLINK_RESULT_TYPE_INSUFFICIENT_PRIVILEGE;
+    } else if (error == ERROR_ALREADY_EXISTS) {
+      return SYMLINK_RESULT_TYPE_ALREADY_EXISTS;
+    } else {
+      return SYMLINK_RESULT_TYPE_UNKNOWN;
     }
-    if (CreateSymbolicLinkA(destination, source, symlink_flags) == 0) {
-        const DWORD error = GetLastError();
-        if (error == ERROR_PRIVILEGE_NOT_HELD) {
-            return SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE;
-        } else if (error == ERROR_ALREADY_EXISTS) {
-            return SYM_LINK_RESULT_ALREADY_EXISTS;
-        } else {
-            return SYM_LINK_RESULT_UNKNOWN;
-        }
-    }
-    return SYM_LINK_RESULT_OK;
+  }
+  return SYMLINK_RESULT_TYPE_OK;
 }
 
 #elif __linux__
@@ -94,80 +98,85 @@ static SymLinkResult CreateSymLink(const char * source, const char * destination
 
 #define MAXIMUM_PATH_LENGTH PATH_MAX
 
-static void GetAbsolutePathToSource(const char * source, char * buffer, unsigned int buffer_size) {
-    (void)buffer_size;
-    const char * result = realpath(source, buffer);
-    assert(result != NULL);
+static void get_absolute_path_to_src(const char *src, char *buf, unsigned int buf_size)
+{
+  (void)buf_size;
+  const char *result = realpath(src, buf);
+  assert(result != NULL);
 }
 
-static void GetAbsolutePathToDestination(const char * destination, char * buffer, unsigned int buffer_size) {
-    (void)buffer_size;
-    wordexp_t p = {0};
-    const int result = wordexp(destination, &p, 0);
-    assert(result == 0);
-    memcpy(buffer, p.we_wordv[0], strlen(p.we_wordv[0]));
-    wordfree(&p);
+static void get_absolute_path_to_dest(const char *dest, char *buf, unsigned int buf_size)
+{
+  (void)buf_size;
+  wordexp_t p = {0};
+  const int result = wordexp(dest, &p, 0);
+  assert(result == 0);
+  memcpy(buf, p.we_wordv[0], strlen(p.we_wordv[0]));
+  wordfree(&p);
 }
 
-static bool IsDirectory(const char * path) {
-    struct stat s = {0};
-    const int result = stat(path, &s);
-    assert(result == 0);
-    return s.st_mode & S_IFDIR;
+static bool is_directory(const char *path)
+{
+  struct stat s = {0};
+  const int result = stat(path, &s);
+  assert(result == 0);
+  return s.st_mode & S_IFDIR;
 }
 
-static SymLinkResult CreateSymLink(const char * source, const char * destination, bool is_directory) {
-    (void)is_directory;
-    if (symlink(source, destination) == -1) {
-        if (errno == EACCES) {
-            return SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE;
-        } else if (errno == EEXIST) {
-            return SYM_LINK_RESULT_ALREADY_EXISTS;
-        } else {
-            return SYM_LINK_RESULT_UNKNOWN;
-        }
+static symlink_result_type create_symlink(const char *src, const char *dest, bool is_directory)
+{
+  (void)is_directory;
+  if (symlink(src, dest) == -1) {
+    if (errno == EACCES) {
+      return SYMLINK_RESULT_TYPE_INSUFFICIENT_PRIVILEGE;
+    } else if (errno == EEXIST) {
+      return SYMLINK_RESULT_TYPE_ALREADY_EXISTS;
+    } else {
+      return SYMLINK_RESULT_TYPE_UNKNOWN;
     }
-    return SYM_LINK_RESULT_OK;
+  }
+  return SYMLINK_RESULT_TYPE_OK;
 }
 
 #else
 #error Unsupported platform
 #endif
 
-int main(void) {
-    for (size_t i = 0; i < ArraySize(config_files); ++i) {
-        const ConfigFile file = config_files[i];
+int main(void)
+{
+  for (size_t i = 0; i < array_size(config_files); ++i) {
+    const config_file file = config_files[i];
 
-        char source_abs_path[MAXIMUM_PATH_LENGTH] = {0};
-        GetAbsolutePathToSource(file.source, source_abs_path, ArraySize(source_abs_path));
+    char src_abs_path[MAXIMUM_PATH_LENGTH] = {0};
+    get_absolute_path_to_src(file.src, src_abs_path, array_size(src_abs_path));
 
 #ifdef _WIN32
-        const char * destination = file.destination.windows;
+    const char *dest = file.dest.windows;
 #elif __linux__
-        const char * destination = file.destination.linux;
+    const char *dest = file.dest.linux;
 #endif
-        if (destination == NULL) {
-            continue;
-        }
-        char destination_abs_path[MAXIMUM_PATH_LENGTH] = {0};
-        GetAbsolutePathToDestination(destination, destination_abs_path, ArraySize(destination_abs_path));
-
-        const bool is_directory = IsDirectory(source_abs_path);
-        const SymLinkResult result = CreateSymLink(source_abs_path, destination_abs_path, is_directory);
-        if (result == SYM_LINK_RESULT_INSUFFICIENT_PRIVILEGE) {
-            fprintf(stderr, "error: cannot create a symbolic link because of insufficient privileges, either run this program as an administrator or enable Developer Mode in Windows 10\n");
-            exit(1);
-        } else if (result == SYM_LINK_RESULT_ALREADY_EXISTS) {
-            if (is_directory) {
-                fprintf(stderr, "warning: directory already exists at %s\n", destination_abs_path);
-            } else {
-                fprintf(stderr, "warning: file already exists at %s\n", destination_abs_path);
-            }
-        } else if (result == SYM_LINK_RESULT_UNKNOWN) {
-            fprintf(stderr, "error: please debug me\n");
-            exit(1);
-        } else {
-            printf("%s -> %s\n", source_abs_path, destination_abs_path);
-        }
+    if (dest == NULL) {
+      continue;
     }
+    char dest_abs_path[MAXIMUM_PATH_LENGTH] = {0};
+    get_absolute_path_to_dest(dest, dest_abs_path, array_size(dest_abs_path));
+
+    const bool directory = is_directory(src_abs_path);
+    const symlink_result_type result = create_symlink(src_abs_path, dest_abs_path, directory);
+    if (result == SYMLINK_RESULT_TYPE_INSUFFICIENT_PRIVILEGE) {
+      fprintf(stderr, "error: cannot create a symbolic link because of insufficient privileges, either run this program as an administrator or enable Developer Mode in Windows 10\n");
+      exit(1);
+    } else if (result == SYMLINK_RESULT_TYPE_ALREADY_EXISTS) {
+      if (directory) {
+        fprintf(stderr, "warning: directory already exists at %s\n", dest_abs_path);
+      } else {
+        fprintf(stderr, "warning: file already exists at %s\n", dest_abs_path);
+      }
+    } else if (result == SYMLINK_RESULT_TYPE_UNKNOWN) {
+      fprintf(stderr, "error: please debug me\n");
+      exit(1);
+    } else {
+      printf("%s -> %s\n", src_abs_path, dest_abs_path);
+    }
+  }
 }

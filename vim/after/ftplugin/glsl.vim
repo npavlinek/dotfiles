@@ -1,5 +1,4 @@
 setlocal cindent
-setlocal cinoptions=l1,g0
 setlocal expandtab
 setlocal formatoptions-=c
 setlocal formatoptions-=o
