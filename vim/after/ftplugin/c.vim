@@ -1,10 +1,9 @@
 setlocal cindent
-setlocal cinoptions=l1,g0
+setlocal cinoptions=:0,l1,g0
 setlocal expandtab
+setlocal formatoptions+=j
 setlocal formatoptions-=c
 setlocal formatoptions-=o
-setlocal formatoptions-=q
-setlocal formatoptions-=r
-setlocal shiftwidth=2
-setlocal softtabstop=2
-setlocal tabstop=2
+setlocal shiftwidth=4
+setlocal softtabstop=4
+setlocal tabstop=4

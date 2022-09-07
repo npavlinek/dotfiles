@@ -38,29 +38,29 @@ let &t_EI = "\<Esc>[2 q"
 let c_space_errors = 1
 
 if has('gui_running')
-  set guioptions-=m
-  set guioptions-=T
-  set guioptions-=L
-  set guioptions-=r
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=L
+    set guioptions-=r
 
-  set renderoptions=type:directx
-  if has("win32")
-    set guifont=Consolas:h11
-  else
-    set guifont=DejaVu\ Sans\ Mono\ 10
-  endif
+    set renderoptions=type:directx
+    if has("win32")
+        set guifont=DejaVu_Sans_Mono:h10
+    else
+        set guifont=DejaVu\ Sans\ Mono\ 10
+    endif
 elseif has("win32")
-  set termguicolors
+    set termguicolors
 endif
 
 silent! colorscheme midnight
 
 function! EscapeHtml()
-  silent s/"/\&quot;/eg
-  silent s/&/\&amp;/eg
-  silent s/'/\&#039;/eg
-  silent s/</\&lt;/eg
-  silent s/>/\&gt;/eg
+    silent s/"/\&quot;/eg
+    silent s/&/\&amp;/eg
+    silent s/'/\&#039;/eg
+    silent s/</\&lt;/eg
+    silent s/>/\&gt;/eg
 endfunction
 
 " Make <Esc> properly exit insert mode in vertical block mode.
