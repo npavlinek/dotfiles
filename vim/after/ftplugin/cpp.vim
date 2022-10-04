@@ -1,1 +1,0 @@
-setlocal cinoptions+=N-s
