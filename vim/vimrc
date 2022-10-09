@@ -21,7 +21,7 @@ set listchars=tab:→\ ,space:·
 set nojoinspaces
 set nowrap
 set ruler
-set scrolloff=1
+set scrolloff=3
 set shortmess+=I
 set sidescroll=5
 set sidescrolloff=5
@@ -45,9 +45,9 @@ if has('gui_running')
 
     set renderoptions=type:directx
     if has("win32")
-        set guifont=DejaVu_Sans_Mono:h10
+        set guifont=Cascadia_Mono:h10
     else
-        set guifont=DejaVu\ Sans\ Mono\ 10
+        set guifont=Cascadia\ Mono\ 10
     endif
 elseif has("win32")
     set termguicolors
