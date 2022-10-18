@@ -45,9 +45,9 @@ if has('gui_running')
 
     set renderoptions=type:directx
     if has("win32")
-        set guifont=Cascadia_Mono:h10
+        set guifont=JetBrains_Mono_NL:h9
     else
-        set guifont=Cascadia\ Mono\ 10
+        set guifont=JetBrains\ Mono\ NL\ 9
     endif
 elseif has("win32")
     set termguicolors
