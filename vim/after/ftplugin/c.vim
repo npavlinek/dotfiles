@@ -1,5 +1,8 @@
 setlocal cindent
-setlocal cinoptions=:0,l1,g0
+setlocal cinoptions+=:0
+setlocal cinoptions+=:l1
+setlocal cinoptions+=N-s
+setlocal cinoptions+=g0
 setlocal formatoptions+=j
 setlocal formatoptions-=o
 setlocal noexpandtab
