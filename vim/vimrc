@@ -1,5 +1,17 @@
-" Enable filetype support, supporting filetype-specific indentation, syntax
-" highlighting and other goodies.
+call plug#begin()
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dummyunit/vim-fastbuild'
+Plug 'guns/vim-sexp', { 'for': 'clojure' }
+Plug 'lifepillar/vim-colortemplate'
+Plug 'lifepillar/vim-solarized8'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+call plug#end()
+
+" Enable filetype support, supporting filetype-specific indentation, syntax highlighting and other
+" goodies.
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
@@ -8,6 +20,7 @@ syntax on
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set colorcolumn=101
 set completeopt=
 set encoding=utf-8
 set expandtab
@@ -21,51 +34,63 @@ set listchars=tab:→\ ,space:·
 set nojoinspaces
 set nowrap
 set ruler
-set scrolloff=3
 set shortmess+=I
-set sidescroll=5
-set sidescrolloff=5
 set smartcase
 set splitbelow
 set splitright
-set textwidth=80
-set virtualedit=all
+set textwidth=100
 
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+let &t_SI = '\<Esc>[6 q'
+let &t_SR = '\<Esc>[4 q'
+let &t_EI = '\<Esc>[2 q'
 
 let c_space_errors = 1
 
 if has('gui_running')
-	set guioptions-=m
-	set guioptions-=T
-	set guioptions-=L
-	set guioptions-=r
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=L
+  set guioptions-=r
 
-	set renderoptions=type:directx
-	if has("win32")
-		set guifont=DejaVu_Sans_Mono:h10
-	else
-		set guifont=DejaVu\ Sans\ Mono\ 10
-	endif
-elseif has("win32")
-	set termguicolors
+  set renderoptions=type:directx,renmode:5,taamode:1
+  if has('win32')
+    set guifont=Comic_Code:h10
+  else
+    set guifont=Comic\ Code\ 10
+  endif
+elseif has('win32')
+  set termguicolors
 endif
 
-silent! colorscheme midnight
+" silent! colorscheme midnight
+
+let g:solarized_italics = 0
+silent! colorscheme solarized8_flat
 
 function! EscapeHtml()
-	silent s/"/\&quot;/eg
-	silent s/&/\&amp;/eg
-	silent s/'/\&#039;/eg
-	silent s/</\&lt;/eg
-	silent s/>/\&gt;/eg
+  silent s/"/\&quot;/eg
+  silent s/&/\&amp;/eg
+  silent s/'/\&#039;/eg
+  silent s/</\&lt;/eg
+  silent s/>/\&gt;/eg
 endfunction
+
+function! ClangFormat()
+  let l:formatdiff = 1
+  " TODO: Find this automatically or something, instead of hard-coding it.
+  py3f D:/Program\ Files/LLVM/share/clang/clang-format.py
+endfunction
+autocmd BufWritePre *.h,*.c,*.hpp,*.cpp call ClangFormat()
 
 " Make <Esc> properly exit insert mode in vertical block mode.
 inoremap <C-c> <Esc>
 
+nnoremap <C-p> :CtrlpPMixed<CR>
 nnoremap <Leader>p "*p
 nnoremap <Leader>y "*y
 nnoremap <silent> <Leader><Leader> :nohl<CR>
@@ -73,5 +98,12 @@ nnoremap <silent> <Leader>q :set list!<CR>
 nnoremap j gj
 nnoremap k gk
 
-vnoremap <Leader>h :call EscapeHtml()<CR>
+vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "*y
+
+" Workaround for a `vim-fireplace` bug.
+if has('win32')
+  let g:fireplace_python_executable = 'python'
+endif
+
+let g:rustfmt_autosave = 1
