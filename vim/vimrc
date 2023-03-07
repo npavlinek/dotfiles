@@ -60,7 +60,7 @@ if has('gui_running')
 	if has('win32')
 		set guifont=Liberation_Mono:h10
 	else
-		set guifont=Comic\ Code\ 10
+		set guifont=Liberation\ Mono\ 10
 	endif
 elseif has('win32')
 	set termguicolors
@@ -74,14 +74,6 @@ highlight Normal guibg=#000000
 highlight StatusLine guifg=#1d2021
 highlight VertSplit guibg=NONE
 highlight Visual guifg=#076678 guibg=#ffffff
-
-function! EscapeHtml()
-	silent s/"/\&quot;/eg
-	silent s/&/\&amp;/eg
-	silent s/'/\&#039;/eg
-	silent s/</\&lt;/eg
-	silent s/>/\&gt;/eg
-endfunction
 
 " Make <Esc> properly exit insert mode in vertical block mode.
 inoremap <C-c> <Esc>
