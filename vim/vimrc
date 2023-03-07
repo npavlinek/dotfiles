@@ -1,10 +1,8 @@
 call plug#begin()
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dummyunit/vim-fastbuild'
+Plug 'gruvbox-community/gruvbox'
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'lifepillar/vim-colortemplate'
-Plug 'lifepillar/vim-solarized8'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
@@ -32,6 +30,7 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
+set noshowcmd
 set nowrap
 set ruler
 set shortmess+=I
@@ -40,7 +39,7 @@ set splitbelow
 set splitright
 set textwidth=100
 
-set expandtab
+set noexpandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
@@ -52,40 +51,37 @@ let &t_EI = '\<Esc>[2 q'
 let c_space_errors = 1
 
 if has('gui_running')
-  set guioptions-=m
-  set guioptions-=T
-  set guioptions-=L
-  set guioptions-=r
+	set guioptions-=m
+	set guioptions-=T
+	set guioptions-=L
+	set guioptions-=r
 
-  set renderoptions=type:directx,renmode:5,taamode:1
-  if has('win32')
-    set guifont=Comic_Code:h10
-  else
-    set guifont=Comic\ Code\ 10
-  endif
+	set renderoptions=type:directx,renmode:5,taamode:1
+	if has('win32')
+		set guifont=Liberation_Mono:h10
+	else
+		set guifont=Comic\ Code\ 10
+	endif
 elseif has('win32')
-  set termguicolors
+	set termguicolors
 endif
 
 " silent! colorscheme midnight
 
-let g:solarized_italics = 0
-silent! colorscheme solarized8_flat
+let g:gruvbox_italicize_comments = 0
+silent! colorscheme gruvbox
+highlight Normal guibg=#000000
+highlight StatusLine guifg=#1d2021
+highlight VertSplit guibg=NONE
+highlight Visual guifg=#076678 guibg=#ffffff
 
 function! EscapeHtml()
-  silent s/"/\&quot;/eg
-  silent s/&/\&amp;/eg
-  silent s/'/\&#039;/eg
-  silent s/</\&lt;/eg
-  silent s/>/\&gt;/eg
+	silent s/"/\&quot;/eg
+	silent s/&/\&amp;/eg
+	silent s/'/\&#039;/eg
+	silent s/</\&lt;/eg
+	silent s/>/\&gt;/eg
 endfunction
-
-function! ClangFormat()
-  let l:formatdiff = 1
-  " TODO: Find this automatically or something, instead of hard-coding it.
-  py3f D:/Program\ Files/LLVM/share/clang/clang-format.py
-endfunction
-autocmd BufWritePre *.h,*.c,*.hpp,*.cpp call ClangFormat()
 
 " Make <Esc> properly exit insert mode in vertical block mode.
 inoremap <C-c> <Esc>
@@ -103,7 +99,5 @@ vnoremap <Leader>y "*y
 
 " Workaround for a `vim-fireplace` bug.
 if has('win32')
-  let g:fireplace_python_executable = 'python'
+	let g:fireplace_python_executable = 'python'
 endif
-
-let g:rustfmt_autosave = 1
