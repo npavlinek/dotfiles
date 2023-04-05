@@ -27,6 +27,7 @@ typedef struct {
 static config_file config_files[] = {
   {.src = "emacs", .dest = {.linux = "$HOME/.emacs.d", .windows = "%APPDATA%\\.emacs.d"}},
   {.src = "gitconfig", .dest = {.linux = "$HOME/.gitconfig", .windows = "%USERPROFILE%\\.gitconfig"}},
+  {.src = "nvim", .dest = {.linux = "$HOME/.config/nvim", .windows = "%LOCALAPPDATA%\\nvim"}},
   {.src = "openbox", .dest = {.linux = "$HOME/.config/openbox", .windows = NULL}},
   {.src = "vim", .dest = {.linux = "$HOME/.vim", .windows = "%USERPROFILE%\\vimfiles"}},
   {.src = "xinitrc", .dest = {.linux = "$HOME/.xinitrc", .windows = NULL}}
