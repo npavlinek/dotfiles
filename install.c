@@ -27,6 +27,7 @@ struct ConfigFile {
 static struct ConfigFile config_files[] = {
     { .src = "emacs", .dst = { .linux = "$HOME/.emacs.d", .windows = "%APPDATA%\\.emacs.d" } },
     { .src = "gitconfig", .dst = { .linux = "$HOME/.gitconfig", .windows = "%USERPROFILE%\\.gitconfig" } },
+    { .src = "hgrc", .dst = { .linux = "$HOME/.config/hg/hgrc", .windows = "%USERPROFILE%\\.hgrc" } },
     { .src = "nvim", .dst = { .linux = "$HOME/.config/nvim", .windows = "%LOCALAPPDATA%\\nvim" } },
     { .src = "openbox", .dst = { .linux = "$HOME/.config/openbox", .windows = NULL } },
     { .src = "vim", .dst = { .linux = "$HOME/.vim", .windows = "%USERPROFILE%\\vimfiles" } },
