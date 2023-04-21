@@ -17,7 +17,7 @@
 
 (mapcar #'np/install-package '(magit expand-region paredit))
 
-;;; TODO: Take a look at this.
+;;; TODO: Take a look at this. I don't remember what this was about...
 (let ((custom-temporary-file-directory
        (concat temporary-file-directory "emacs-np/")))
   (ignore-errors
@@ -37,8 +37,6 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-(add-hook 'emacs-startup-hook #'(lambda () (toggle-frame-fullscreen)))
-
 (column-number-mode)
 (global-auto-revert-mode)
 (show-paren-mode)
@@ -46,17 +44,19 @@
 (when (equal (system-name) "sanguinius")
   (display-battery-mode))
 
-(let ((theme-name 'handmade))
+(let ((theme-name 'deeper-blue))
   (when (member theme-name (custom-available-themes))
     (load-theme theme-name t)))
 
-(let ((font "Cousine")
-      (font-size "10"))
+(let ((font "Iosevka Fixed")
+      (font-size "11"))
   (when (member font (font-family-list))
       (set-frame-font (concat font "-" font-size) t t)))
 
-(setq-default fill-column 80
+(setq-default cursor-type 'bar
+              fill-column 80
               indent-tabs-mode nil
+              indicate-empty-lines t
               show-trailing-whitespace t
               truncate-lines t)
 
@@ -85,13 +85,11 @@
           #'(lambda () (setq truncate-lines nil
                              show-trailing-whitespace nil)))
 
-(defun lgs-style ()
-  (c-set-style "stroustrup")
-  (c-toggle-comment-style -1)           ; use C++-style comments
-  (setq-local c-basic-offset 3
-              compile-command "build"))
+(defun knr-style ()
+  (c-set-style "k&r")
+  (c-toggle-comment-style 1)            ; use C-style comments
+  (setq-local c-basic-offset 4))
 
-(add-hook 'c-mode-common-hook #'lgs-style)
-
+(add-hook 'c-mode-common-hook #'knr-style)
 (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook #'enable-paredit-mode)
