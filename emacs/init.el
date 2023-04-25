@@ -44,7 +44,7 @@
 (when (equal (system-name) "sanguinius")
   (display-battery-mode))
 
-(let ((theme-name 'deeper-blue))
+(let ((theme-name 'modus-vivendi))
   (when (member theme-name (custom-available-themes))
     (load-theme theme-name t)))
 
@@ -53,7 +53,7 @@
   (when (member font (font-family-list))
       (set-frame-font (concat font "-" font-size) t t)))
 
-(setq-default cursor-type 'bar
+(setq-default cursor-type 'box
               fill-column 80
               indent-tabs-mode nil
               indicate-empty-lines t
@@ -79,6 +79,7 @@
       ido-create-new-buffer 'always)
 
 (global-set-key (kbd "C-=") #'er/expand-region)
+(global-set-key (kbd "C-M-=") #'er/contract-region)
 (global-set-key (kbd "<f5>") #'recompile)
 
 (add-hook 'compilation-mode-hook
@@ -86,6 +87,7 @@
                              show-trailing-whitespace nil)))
 
 (defun knr-style ()
+  (interactive)
   (c-set-style "k&r")
   (c-toggle-comment-style 1)            ; use C-style comments
   (setq-local c-basic-offset 4))
