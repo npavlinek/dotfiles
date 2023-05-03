@@ -1,4 +1,5 @@
 call plug#begin()
+Plug 'Alligator/accent.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
@@ -37,14 +38,12 @@ set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
-set textwidth=80
+set textwidth=100
 
-set expandtab
+set noexpandtab
 set shiftwidth=4
 set softtabstop=4
-set tabstop=8
-
-let c_space_errors = 1
+set tabstop=4
 
 if has('gui_running')
     set guioptions-=m
@@ -52,7 +51,10 @@ if has('gui_running')
     set guioptions-=L
     set guioptions-=r
 
-    set renderoptions=type:directx,renmode:5,taamode:1
+    set guicursor=n:block-Cursor
+    set guicursor+=i-v-c:block-iCursor
+
+    " set renderoptions=type:directx,renmode:5,taamode:1
     " @todo: Is this control flow necessary?
     if has('win32')
         set guifont=Cascadia_Mono:h10
@@ -63,8 +65,17 @@ elseif has('win32')
     set termguicolors
 endif
 
-let g:gruvbox_contrast_dark = 'hard'
-silent! colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'hard'
+" silent! colorscheme gruvbox
+
+let g:accent_colour = 'orange'
+silent! colorscheme accent
+
+highlight Cursor guifg=white guibg=#fb4934
+highlight iCursor guifg=black guibg=#8ec07c
+
+highlight ExtraWhitespace guibg=red
+match ExtraWhitespace /\s\+$/
 
 let g:mapleader = ' '
 
