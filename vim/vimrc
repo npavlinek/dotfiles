@@ -1,7 +1,5 @@
 call plug#begin()
-Plug 'Alligator/accent.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'gruvbox-community/gruvbox'
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'lifepillar/vim-colortemplate'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -9,8 +7,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 call plug#end()
 
-" Enable filetype support, supporting filetype-specific indentation, syntax
-" highlighting and other goodies.
+" Enable filetype support, supporting filetype-specific indentation, syntax highlighting and other
+" goodies.
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
@@ -30,7 +28,6 @@ set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
 set nowrap
-set number
 set ruler
 set scrolloff=8
 set shortmess+=I
@@ -39,42 +36,27 @@ set smartcase
 set splitbelow
 set splitright
 set textwidth=100
-
-set noexpandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set virtualedit=all
 
 if has('gui_running')
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=L
-    set guioptions-=r
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=L
+  set guioptions-=r
 
-    set guicursor=n:block-Cursor
-    set guicursor+=i-v-c:block-iCursor
-
-    " set renderoptions=type:directx,renmode:5,taamode:1
-    " @todo: Is this control flow necessary?
-    if has('win32')
-        set guifont=Cascadia_Mono:h10
-    else
-        set guifont=Cascadia\ Mono\ 10
-    endif
+  if has('win32')
+    set guifont=Cascadia_Mono:h10
+  else
+    set guifont=Cascadia\ Mono\ 10
+  endif
 elseif has('win32')
-    set termguicolors
+  set termguicolors
 endif
 
-" let g:gruvbox_contrast_dark = 'hard'
-" silent! colorscheme gruvbox
-
-let g:accent_colour = 'orange'
-silent! colorscheme accent
-
-highlight Cursor guifg=white guibg=#fb4934
-highlight iCursor guifg=black guibg=#8ec07c
+silent! colorscheme midnight
 
 highlight ExtraWhitespace guibg=red
+" @todo: I don't think this match is executing properly.
 match ExtraWhitespace /\s\+$/
 
 let g:mapleader = ' '
