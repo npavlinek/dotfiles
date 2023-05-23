@@ -39,7 +39,6 @@ static file_path config_files[] = {
    { "emacs",     { "$HOME/.emacs.d",        "%APPDATA%\\.emacs.d"          } },
    { "gitconfig", { "$HOME/.gitconfig",      "%USERPROFILE%\\.gitconfig"    } },
    { "hgrc",      { "$HOME/.config/hg/hgrc", "%USERPROFILE%\\mercurial.ini" } },
-   { "nvim",      { "$HOME/.config/nvim",    "%LOCALAPPDATA%\\nvim"         } },
    { "openbox",   { "$HOME/.config/openbox", NULL                           } },
    { "vim",       { "$HOME/.vim",            "%USERPROFILE%\\vimfiles"      } },
    { "xinitrc",   { "$HOME/.xinitrc",        NULL                           } }
