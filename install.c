@@ -41,7 +41,7 @@ static file_path config_files[] = {
    { "hgrc",      { "$HOME/.config/hg/hgrc", "%USERPROFILE%\\mercurial.ini" } },
    { "nvim",      { "$HOME/.config/nvim",    "%LOCALAPPDATA%\\nvim"         } },
    { "openbox",   { "$HOME/.config/openbox", NULL                           } },
-   { "vim",       { .linux = "$HOME/.vim",   "%USERPROFILE%\\vimfiles"      } },
+   { "vim",       { "$HOME/.vim",            "%USERPROFILE%\\vimfiles"      } },
    { "xinitrc",   { "$HOME/.xinitrc",        NULL                           } }
 };
 
