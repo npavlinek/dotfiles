@@ -30,11 +30,13 @@ set nojoinspaces
 set nowrap
 set ruler
 set scrolloff=8
+set shiftwidth=4
 set shortmess+=I
 set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
+set tabstop=4
 set textwidth=100
 set virtualedit=all
 
@@ -45,7 +47,7 @@ if has('gui_running')
   set guioptions-=r
 
   if has('win32')
-    set guifont=Cascadia_Mono:h10
+    set guifont=Consolas:h10
   else
     set guifont=Cascadia\ Mono\ 10
   endif
