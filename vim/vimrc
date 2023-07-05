@@ -1,14 +1,15 @@
 call plug#begin()
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'guns/vim-sexp', { 'for': 'clojure' }
+Plug 'guns/vim-sexp', {'for': 'clojure'}
+Plug 'keith/parsec.vim'
 Plug 'lifepillar/vim-colortemplate'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', {'for': 'clojure'}
 call plug#end()
 
-" Enable filetype support, supporting filetype-specific indentation, syntax highlighting and other
-" goodies.
+" Enable filetype support, supporting filetype-specific indentation, syntax
+" highlighting and other goodies.
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
@@ -30,32 +31,37 @@ set nojoinspaces
 set nowrap
 set ruler
 set scrolloff=8
-set shiftwidth=4
 set shortmess+=I
 set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
-set tabstop=4
-set textwidth=100
 set virtualedit=all
 
-if has('gui_running')
-  set guioptions-=m
-  set guioptions-=T
-  set guioptions-=L
-  set guioptions-=r
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set textwidth=80
 
-  if has('win32')
-    set guifont=Consolas:h10
-  else
-    set guifont=Cascadia\ Mono\ 10
-  endif
+if has('gui_running')
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=L
+    set guioptions-=r
+
+    set renderoptions=type:directx,renmode:5,taamode:1
+    if has('win32')
+        set guifont=Office_Code_Pro:h10
+    else
+        set guifont=Ofice\ Code\ Pro\ 10
+    endif
 elseif has('win32')
-  set termguicolors
+    set termguicolors
 endif
 
-silent! colorscheme midnight
+silent! colorscheme parsec
+
+" silent! colorscheme midnight
 
 highlight ExtraWhitespace guibg=red
 " @todo: I don't think this match is executing properly.
@@ -77,6 +83,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap n nzz
 
+vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
 vnoremap <Leader>p "*p
 vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "*y

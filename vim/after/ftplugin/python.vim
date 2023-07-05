@@ -1,7 +1,5 @@
-" By default, Python code after parenthesis gets indented `2 * shiftwidth`, this
-" changes it to just be `shiftwidth`.
-let g:pyindent_open_paren=shiftwidth()
-
-setlocal expandtab
 setlocal formatoptions-=t
-setlocal shiftwidth=4
+
+" By default, Vim uses 2*shiftwidth for continuation lines. Let's change this to
+" just shiftwidth.
+let g:pyindent_open_paren=shiftwidth()
