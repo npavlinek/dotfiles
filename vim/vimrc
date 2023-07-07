@@ -1,13 +1,3 @@
-call plug#begin()
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'guns/vim-sexp', {'for': 'clojure'}
-Plug 'keith/parsec.vim'
-Plug 'lifepillar/vim-colortemplate'
-Plug 'tpope/vim-fireplace', {'for': 'clojure'}
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sexp-mappings-for-regular-people', {'for': 'clojure'}
-call plug#end()
-
 " Enable filetype support, supporting filetype-specific indentation, syntax
 " highlighting and other goodies.
 filetype plugin indent on
@@ -28,7 +18,6 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
-set nowrap
 set ruler
 set scrolloff=8
 set shortmess+=I
@@ -59,13 +48,13 @@ elseif has('win32')
     set termguicolors
 endif
 
-silent! colorscheme parsec
-
-" silent! colorscheme midnight
-
+colorscheme torte
 highlight ExtraWhitespace guibg=red
+highlight LongLine gui=underline term=underline
+highlight Normal guibg=#1c1c1c
 " @todo: I don't think this match is executing properly.
 match ExtraWhitespace /\s\+$/
+match LongLine '\%>80v.\+'
 
 let g:mapleader = ' '
 
@@ -73,7 +62,6 @@ let g:mapleader = ' '
 inoremap <C-C> <Esc>
 
 nnoremap <C-D> <C-D>zz
-nnoremap <C-P> <Cmd>CtrlPMixed<CR>
 nnoremap <C-U> <C-U>zz
 nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>set list!<CR>
