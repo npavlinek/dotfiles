@@ -32,29 +32,15 @@ set shiftwidth=4
 set softtabstop=4
 set textwidth=80
 
-if has('gui_running')
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=L
-    set guioptions-=r
-
-    set renderoptions=type:directx,renmode:5,taamode:1
-    if has('win32')
-        set guifont=DejaVu_Sans_Mono:h10
-    else
-        set guifont=DejaVu\ Sans\ Mono\ 10
+if has('win32')
+    set guicursor=a:block-Cursor
+    if has('vcon')
+        set termguicolors
     endif
-elseif has('win32')
-    set termguicolors
 endif
 
 colorscheme torte
-highlight ExtraWhitespace guibg=red
-highlight LongLine gui=underline term=underline
-highlight Normal guibg=#1c1c1c
-" @todo: I don't think this match is executing properly.
-match ExtraWhitespace /\s\+$/
-match LongLine '\%>80v.\+'
+highlight SpellBad guibg=red
 
 let g:mapleader = ' '
 
