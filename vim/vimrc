@@ -40,7 +40,7 @@ if has('win32')
 endif
 
 colorscheme torte
-highlight SpellBad guibg=red
+highlight SpellBad guibg=red guifg=white
 
 let g:mapleader = ' '
 
