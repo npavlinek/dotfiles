@@ -32,6 +32,10 @@ set shiftwidth=4
 set softtabstop=4
 set textwidth=80
 
+if has('win32')
+    set guicursor=a:block-Cursor
+endif
+
 colorscheme torte
 highlight SpellBad ctermbg=4 ctermfg=15
 highlight SpellCap ctermfg=0
