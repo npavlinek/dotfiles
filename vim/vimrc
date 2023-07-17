@@ -37,9 +37,10 @@ if has('win32')
 endif
 
 colorscheme torte
-highlight SpellBad ctermbg=4 ctermfg=15
-highlight SpellCap ctermfg=0
-highlight StatusLine ctermbg=8 ctermfg=15
+highlight IncSearch ctermbg=lightgray ctermfg=black
+highlight SpellBad ctermbg=darkred ctermfg=white
+highlight SpellCap ctermfg=black
+highlight StatusLine ctermbg=darkgray ctermfg=white
 
 let g:mapleader = ' '
 
