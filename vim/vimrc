@@ -32,15 +32,10 @@ set shiftwidth=4
 set softtabstop=4
 set textwidth=80
 
-if has('win32')
-    set guicursor=a:block-Cursor
-    if has('vcon')
-        set termguicolors
-    endif
-endif
-
 colorscheme torte
-highlight SpellBad guibg=red guifg=white
+highlight SpellBad ctermbg=4 ctermfg=15
+highlight SpellCap ctermfg=0
+highlight StatusLine ctermbg=8 ctermfg=15
 
 let g:mapleader = ' '
 
