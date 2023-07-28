@@ -8,6 +8,7 @@ syntax on
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set colorcolumn=81
 set completeopt=
 set encoding=utf-8
 set fileformats=unix,dos,mac
@@ -37,7 +38,9 @@ if has('win32')
 endif
 
 colorscheme torte
+highlight ColorColumn ctermbg=darkgray ctermfg=none
 highlight IncSearch ctermbg=lightgray ctermfg=black
+highlight MatchParen ctermbg=none ctermfg=cyan
 highlight SpellBad ctermbg=darkred ctermfg=white
 highlight SpellCap ctermfg=black
 highlight StatusLine ctermbg=darkgray ctermfg=white
