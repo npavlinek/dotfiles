@@ -20,18 +20,22 @@ set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
 set ruler
-set scrolloff=8
+set scrolloff=3
 set shortmess+=I
 set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
+set textwidth=80
 set virtualedit=all
 
 set expandtab
-set shiftwidth=2
-set softtabstop=2
-set textwidth=80
+set shiftwidth=4
+set softtabstop=4
+
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 
 if has('win32')
     set guicursor=a:block-Cursor
