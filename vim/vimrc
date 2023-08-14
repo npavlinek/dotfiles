@@ -70,6 +70,8 @@ vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "*y
 
 augroup npStartup
+    autocmd!
+
     " Jump to the last known cursor position in a buffer. Taken from Vim's
     " 'defaults.vim'.
     autocmd BufReadPost *
