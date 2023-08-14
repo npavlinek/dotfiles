@@ -73,7 +73,7 @@ augroup npStartup
     autocmd!
 
     " Jump to the last known cursor position in a buffer. Taken from Vim's
-    " 'defaults.vim'.
+    " 'defaults.vim' (https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111).
     autocmd BufReadPost *
         \ let line = line("'\"")
         \ | if line >= 1 && line <= line("$") && &filetype !~# 'commit'
