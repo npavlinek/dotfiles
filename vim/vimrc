@@ -8,7 +8,7 @@ syntax on
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set colorcolumn=81
+set colorcolumn=+1
 set completeopt=
 set encoding=utf-8
 set fileformats=unix,dos,mac
