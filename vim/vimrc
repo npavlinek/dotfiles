@@ -45,6 +45,7 @@ colorscheme torte
 highlight ColorColumn ctermbg=darkgray ctermfg=none
 highlight IncSearch ctermbg=lightgray ctermfg=black
 highlight MatchParen ctermbg=none ctermfg=cyan
+highlight SpecialKey ctermfg=darkgray
 highlight SpellBad ctermbg=darkred ctermfg=white
 highlight SpellCap ctermfg=black
 highlight StatusLine ctermbg=darkgray ctermfg=white
