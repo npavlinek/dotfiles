@@ -10,6 +10,7 @@ set autoread
 set backspace=indent,eol,start
 set colorcolumn=+1
 set completeopt=
+set display=lastline
 set encoding=utf-8
 set fileformats=unix,dos,mac
 set hidden
@@ -31,7 +32,6 @@ set virtualedit=all
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-set tabstop=8
 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
