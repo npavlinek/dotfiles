@@ -61,6 +61,7 @@ nnoremap <C-U> <C-U>zz
 nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>set list!<CR>
 nnoremap <Leader>y "*y
+nnoremap <Leader>z <Cmd>set spell!<CR>
 nnoremap N Nzz
 nnoremap j gj
 nnoremap k gk
