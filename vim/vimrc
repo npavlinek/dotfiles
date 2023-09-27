@@ -27,6 +27,7 @@ set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
+set textwidth=80
 set virtualedit=all
 
 set expandtab

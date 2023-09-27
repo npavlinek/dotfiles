@@ -6,4 +6,3 @@ setlocal cinoptions+=l1
 setlocal colorcolumn=0
 setlocal formatoptions+=j
 setlocal formatoptions-=o
-setlocal textwidth=80

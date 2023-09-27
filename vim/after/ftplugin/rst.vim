@@ -1,2 +1,2 @@
 setlocal formatoptions-=c
-setlocal spell
+setlocal formatoptions-=t
