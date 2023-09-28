@@ -1,3 +1,11 @@
+# Increase key repeat rate
 xset r rate 300 50
 
-exec openbox-session
+# Enable touchpad tap-to-click
+xinput set-prop 11 "libinput Tapping Enabled" 1
+
+# Set the Caps-Lock key as another Control
+setxkbmap -option ctrl:nocaps
+
+# Start the i3 WM
+exec i3

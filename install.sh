@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-ln -n -s "$PWD/gitconfig" "$HOME/.gitconfig"
-ln -n -s "$PWD/hgrc" "$HOME/.config/hg/hgrc"
-ln -n -s "$PWD/openbox" "$HOME/.config/openbox"
-ln -n -s "$PWD/vim" "$HOME/.vim"
-ln -n -s "$PWD/xinitrc" "$HOME/.xinitrc"
+ln -nrs "$PWD/gitconfig" "$HOME/.gitconfig"
+ln -nrs "$PWD/hgrc" "$HOME/.hgrc"
+ln -nrs "$PWD/i3" "$HOME/.config/i3"
+ln -nrs "$PWD/vim" "$HOME/.vim"
+ln -nrs "$PWD/xinitrc" "$HOME/.xinitrc"
