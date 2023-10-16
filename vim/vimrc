@@ -8,7 +8,6 @@ syntax on
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set colorcolumn=+1
 set completeopt=
 set display=lastline
 set encoding=utf-8
@@ -31,8 +30,8 @@ set textwidth=80
 set virtualedit=all
 
 set expandtab
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
@@ -42,14 +41,7 @@ if has('win32')
     set guicursor=a:block-Cursor
 endif
 
-colorscheme torte
-highlight ColorColumn ctermbg=darkgray ctermfg=none
-highlight IncSearch ctermbg=lightgray ctermfg=black
-highlight MatchParen ctermbg=none ctermfg=cyan
-highlight SpecialKey ctermfg=darkgray
-highlight SpellBad ctermbg=darkred ctermfg=white
-highlight SpellCap ctermfg=black
-highlight StatusLine ctermbg=darkgray ctermfg=white
+colorscheme evening
 
 let g:mapleader = ' '
 
