@@ -76,3 +76,5 @@ augroup npStartup
 		\ |   execute "normal! g`\""
 		\ | endif
 augroup END
+
+let g:markdown_recommended_style = 0
