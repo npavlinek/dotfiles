@@ -4,7 +4,7 @@
 
 This is a repository for all of my personal configuration files.
 
-== Installation
+## Installation
 
 On POSIX-like systems, run:
 
