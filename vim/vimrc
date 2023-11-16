@@ -1,5 +1,4 @@
-" Enable filetype support, supporting filetype-specific indentation, syntax
-" highlighting and other goodies.
+" Enable filetype support, supporting filetype-specific indentation, syntax highlighting and other goodies.
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
@@ -19,6 +18,7 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
+set number
 set ruler
 set scrolloff=3
 set shortmess+=I
@@ -26,13 +26,12 @@ set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
-set textwidth=80
 set virtualedit=all
 
 set noexpandtab
-set shiftwidth=8
+set shiftwidth=4
 set softtabstop=0
-set tabstop=8
+set tabstop=4
 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
@@ -68,11 +67,10 @@ vnoremap <Leader>y "*y
 augroup npStartup
 	autocmd!
 
-	" Jump to the last known cursor position in a buffer. Taken from Vim's 'defaults.vim' (https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111).
+	" Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`: https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
 	autocmd BufReadPost *
 		\ let line = line("'\"")
-		\ | if line >= 1 && line <= line("$") && &filetype !~# 'commit'
-		\      && index(['xxd', 'gitrebase'], &filetype) == -1
+		\ | if line >= 1 && line <= line("$") && &filetype !~# 'commit' && index(['xxd', 'gitrebase'], &filetype) == -1
 		\ |   execute "normal! g`\""
 		\ | endif
 augroup END
