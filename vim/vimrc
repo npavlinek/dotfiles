@@ -1,4 +1,5 @@
-" Enable filetype support, supporting filetype-specific indentation, syntax highlighting and other goodies.
+" Enable filetype support, supporting filetype-specific indentation, syntax
+" highlighting and other goodies.
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
@@ -18,7 +19,6 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
-set nowrap
 set ruler
 set scrolloff=3
 set shortmess+=I
@@ -26,24 +26,19 @@ set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
-set virtualedit=all
 
-set noexpandtab
-set shiftwidth=8
-set softtabstop=0
+set expandtab
+set shiftwidth=4
+set softtabstop=4
 set tabstop=8
 
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
-
-if has('win32')
-	set guicursor=a:block-Cursor
+if has("win32")
+    set guicursor=a:block-Cursor
 endif
 
 colorscheme evening
 
-let g:mapleader = ' '
+let g:mapleader = " "
 
 " Make <Esc> exit insert mode in vertical block mode.
 inoremap <C-C> <Esc>
@@ -65,15 +60,14 @@ vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "*y
 
 augroup npStartup
-	autocmd!
+    autocmd!
 
-	" Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`: https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
-	autocmd BufReadPost *
-		\ let line = line("'\"")
-		\ | if line >= 1 && line <= line("$") && &filetype !~# 'commit' && index(['xxd', 'gitrebase'], &filetype) == -1
-		\ |   execute "normal! g`\""
-		\ | endif
+    " Jump to the last known cursor position in a buffer. Taken from Vim's
+    " `defaults.vim`:
+    " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
+    autocmd BufReadPost *
+        \ let line = line("'\"")
+        \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
+        \ |   execute "normal! g`\""
+        \ | endif
 augroup END
-
-let g:markdown_recommended_style = 0
-let g:python_recommended_style = 0
