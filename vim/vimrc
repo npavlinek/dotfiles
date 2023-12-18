@@ -13,6 +13,7 @@ set display=lastline
 set encoding=utf-8
 set fileformats=unix,dos,mac
 set hidden
+set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
@@ -45,6 +46,7 @@ inoremap <C-C> <Esc>
 
 nnoremap <C-D> <C-D>zz
 nnoremap <C-U> <C-U>zz
+nnoremap <Leader><Leader> <Cmd>nohlsearch<CR>
 nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>set list!<CR>
 nnoremap <Leader>y "*y
