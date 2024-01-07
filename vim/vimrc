@@ -29,13 +29,16 @@ set smartcase
 set splitbelow
 set splitright
 
-set expandtab
-set shiftwidth=4
-set softtabstop=4
+set noexpandtab
+set shiftwidth=8
+set softtabstop=0
 set tabstop=8
 
+let g:markdown_recommended_style = 0
+let g:python_recommended_style = 0
+
 if has("win32")
-    set guicursor=a:block-Cursor
+	set guicursor=a:block-Cursor
 endif
 
 colorscheme evening
@@ -62,15 +65,13 @@ vnoremap <Leader>p "*p
 vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "*y
 
-augroup npStartup
-    autocmd!
+augroup my_startup
+	autocmd!
 
-    " Jump to the last known cursor position in a buffer. Taken from Vim's
-    " `defaults.vim`:
-    " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
-    autocmd BufReadPost *
-        \ let line = line("'\"")
-        \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
-        \ |   execute "normal! g`\""
-        \ | endif
-augroup END
+	" Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`: https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
+	autocmd BufReadPost *
+		\ let line = line("'\"")
+		\ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
+		\ |   execute "normal! g`\""
+		\ | endif
+augroup end
