@@ -41,7 +41,7 @@ if has("win32")
 	set guicursor=a:block-Cursor
 endif
 
-colorscheme evening
+syntax off
 
 let g:mapleader = " "
 
