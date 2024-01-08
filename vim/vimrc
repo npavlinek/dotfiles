@@ -21,6 +21,7 @@ set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
 set nowrap
+set number
 set ruler
 set scrolloff=3
 set shortmess+=I
