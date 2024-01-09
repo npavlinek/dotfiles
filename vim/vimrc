@@ -36,6 +36,7 @@ set softtabstop=0
 set tabstop=8
 
 let g:markdown_recommended_style = 0
+let g:omni_sql_no_default_maps = 1
 let g:python_recommended_style = 0
 
 if has("win32")
