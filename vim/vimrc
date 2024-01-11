@@ -20,7 +20,6 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
-set nowrap
 set number
 set ruler
 set scrolloff=3
@@ -44,6 +43,8 @@ if has("win32")
 endif
 
 syntax off
+
+highlight TrailingWhitespace ctermbg=red guibg=red
 
 let g:mapleader = " "
 
@@ -76,4 +77,6 @@ augroup my_startup
 		\ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
 		\ |   execute "normal! g`\""
 		\ | endif
+
+	autocmd BufWinEnter * match TrailingWhitespace /\s\+$/
 augroup end

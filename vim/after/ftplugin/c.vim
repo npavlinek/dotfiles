@@ -1,5 +1,3 @@
-let c_space_errors = 1
-
 setlocal cindent
 setlocal cinoptions+=:0
 setlocal cinoptions+=L8
