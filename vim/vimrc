@@ -20,6 +20,7 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
+set nowrap
 set number
 set ruler
 set scrolloff=3
@@ -29,17 +30,15 @@ set smartcase
 set splitbelow
 set splitright
 
-set noexpandtab
-set shiftwidth=8
-set softtabstop=0
+set expandtab
+set shiftwidth=4
+set softtabstop=4
 set tabstop=8
 
-let g:markdown_recommended_style = 0
 let g:omni_sql_no_default_maps = 1
-let g:python_recommended_style = 0
 
 if has("win32")
-	set guicursor=a:block-Cursor
+    set guicursor=a:block-Cursor
 endif
 
 syntax off
@@ -69,14 +68,16 @@ vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "*y
 
 augroup my_startup
-	autocmd!
+    autocmd!
 
-	" Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`: https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
-	autocmd BufReadPost *
-		\ let line = line("'\"")
-		\ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
-		\ |   execute "normal! g`\""
-		\ | endif
+    " Jump to the last known cursor position in a buffer. Taken from Vim's
+    " `defaults.vim`:
+    " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
+    autocmd BufReadPost *
+        \   let line = line("'\"")
+        \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
+        \ |     execute "normal! g`\""
+        \ | endif
 
-	autocmd BufWinEnter * match TrailingWhitespace /\s\+$/
+    autocmd BufWinEnter * match TrailingWhitespace /\s\+$/
 augroup end
