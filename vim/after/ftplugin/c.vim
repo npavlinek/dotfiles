@@ -7,4 +7,4 @@ setlocal cinoptions+=g0
 setlocal cinoptions+=l1
 setlocal cinoptions+=t0
 setlocal formatoptions+=j
-setlocal textwidth=80
+setlocal textwidth=100

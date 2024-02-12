@@ -1,5 +1,5 @@
-" Enable filetype support, supporting filetype-specific indentation, syntax
-" highlighting and other goodies.
+" Enable filetype support, supporting filetype-specific indentation, syntax highlighting and other
+" goodies.
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
@@ -20,7 +20,6 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
-set nowrap
 set number
 set ruler
 set scrolloff=3
@@ -41,7 +40,7 @@ if has("win32")
     set guicursor=a:block-Cursor
 endif
 
-syntax off
+color darkblue
 
 highlight TrailingWhitespace ctermbg=red guibg=red
 
@@ -70,8 +69,7 @@ vnoremap <Leader>y "*y
 augroup my_startup
     autocmd!
 
-    " Jump to the last known cursor position in a buffer. Taken from Vim's
-    " `defaults.vim`:
+    " Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`:
     " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
     autocmd BufReadPost *
         \   let line = line("'\"")
