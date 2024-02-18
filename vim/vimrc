@@ -8,6 +8,7 @@ syntax on
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set colorcolumn=+1
 set completeopt=
 set display=lastline
 set encoding=utf-8
@@ -28,6 +29,7 @@ set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
+set textwidth=100
 
 set expandtab
 set shiftwidth=4
@@ -40,7 +42,7 @@ if has("win32")
     set guicursor=a:block-Cursor
 endif
 
-color darkblue
+color torte
 
 highlight TrailingWhitespace ctermbg=red guibg=red
 
