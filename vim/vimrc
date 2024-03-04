@@ -8,7 +8,6 @@ syntax on
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set colorcolumn=+1
 set completeopt=
 set display=lastline
 set encoding=utf-8
