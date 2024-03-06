@@ -7,7 +7,3 @@ setlocal cinoptions+=j1
 setlocal cinoptions+=l1
 setlocal cinoptions+=t0
 setlocal formatoptions+=j
-setlocal noexpandtab
-setlocal shiftwidth=4
-setlocal softtabstop=0
-setlocal tabstop=4

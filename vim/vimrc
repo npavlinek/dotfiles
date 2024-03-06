@@ -28,7 +28,7 @@ set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
-set textwidth=100
+set textwidth=80
 
 set expandtab
 set shiftwidth=4
@@ -41,7 +41,7 @@ if has("win32")
     set guicursor=a:block-Cursor
 endif
 
-color torte
+"color torte
 
 highlight TrailingWhitespace ctermbg=red guibg=red
 
