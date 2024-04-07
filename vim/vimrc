@@ -15,10 +15,10 @@ set fileformats=unix,dos,mac
 set hidden
 set ignorecase
 set incsearch
-set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,space:·
 set nojoinspaces
+set nowrap
 set ruler
 set scrolloff=3
 set shortmess+=I
@@ -27,22 +27,20 @@ set smartcase
 set splitbelow
 set splitright
 
-set noexpandtab
+set expandtab
 set shiftwidth=4
-set softtabstop=0
-set tabstop=4
+set softtabstop=4
+set tabstop=8
 
 if has("win32")
-  set guicursor=a:block-Cursor
+    set guicursor=a:block-Cursor
 endif
 
-color onedark
+syntax off
 
-highlight TrailingWhitespace ctermbg=red guibg=red
-
-let &showbreak='\ '
 let g:mapleader = " "
 let g:omni_sql_no_default_maps = 1
+let loaded_matchparen = 1
 
 " Make <Esc> exit insert mode in vertical block mode.
 inoremap <C-C> <Esc>
@@ -65,16 +63,13 @@ vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "*y
 
 augroup my_startup
-  autocmd!
+    autocmd!
 
-  " Jump to the last known cursor position in a buffer. Taken from Vim's
-  " `defaults.vim`:
-  " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
-  autocmd BufReadPost *
-    \   let line = line("'\"")
-    \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
-    \ |   execute "normal! g`\""
-    \ | endif
-
-  autocmd BufWinEnter * match TrailingWhitespace /\s\+$/
+    " Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`:
+    " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
+    autocmd BufReadPost *
+        \   let line = line("'\"")
+        \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
+        \ |     execute "normal! g`\""
+        \ | endif
 augroup end
