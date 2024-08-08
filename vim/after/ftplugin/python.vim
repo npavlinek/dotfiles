@@ -1,3 +1,2 @@
-" By default Vim uses 2×shiftwidth for continuation lines. Let's change this
-" to just shiftwidth.
+" By default Vim uses double shiftwidth for continuation lines.
 let g:pyindent_open_paren=shiftwidth()

@@ -15,6 +15,7 @@ set fileformats=unix,dos,mac
 set hidden
 set ignorecase
 set incsearch
+set laststatus=2
 set lazyredraw
 set listchars=tab:>\ ,space:.
 set nojoinspaces
@@ -26,6 +27,7 @@ set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
+set statusline=%<%f\ %y[%{&fileencoding}][%{&fileformat}]\ %m%r%=%-14.(%l,%c%V%)\ %P
 
 set expandtab
 set shiftwidth=4
@@ -65,8 +67,7 @@ vnoremap <Leader>y "*y
 augroup my_startup
     autocmd!
 
-    " Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`:
-    " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
+    " Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`: " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111.
     autocmd BufReadPost *
         \   let line = line("'\"")
         \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
