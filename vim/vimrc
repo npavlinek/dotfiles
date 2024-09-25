@@ -42,7 +42,7 @@ let c_space_errors = 1
 let g:mapleader = " "
 let g:omni_sql_no_default_maps = 1
 
-color torte
+color sorbet
 
 " Make <Esc> exit insert mode in vertical block mode.
 inoremap <C-C> <Esc>
