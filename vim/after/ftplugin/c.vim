@@ -1,6 +1,7 @@
 call SpaceIndent(4)
 
 setlocal cindent
+setlocal cinoptions+=(s
 setlocal cinoptions+=:0
 setlocal cinoptions+=E-s
 setlocal cinoptions+=Ls
