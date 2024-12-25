@@ -1,7 +1,5 @@
 [core]
 	autocrlf = false
-[init]
-	defaultBranch = master
 [pull]
 	rebase = true
 [user]
