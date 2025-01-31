@@ -19,16 +19,18 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:>\ ,space:.
 set nojoinspaces
-set nowrap
 set number
 set ruler
-set scrolloff=3
 set shortmess+=I
-set sidescrolloff=8
 set smartcase
 set splitbelow
 set splitright
 set statusline=%<%f\ %y[%{&fileencoding}][%{&fileformat}]\ %m%r%=%-14.(%l,%c%V%)\ %P
+
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=8
 
 if has("win32")
   set guicursor=a:block-Cursor

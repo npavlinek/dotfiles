@@ -1,5 +1,5 @@
 setlocal cindent
-setlocal cinoptions+=(0.5s
+setlocal cinoptions+=(0
 setlocal cinoptions+=:0
 setlocal cinoptions+=E-s
 setlocal cinoptions+=Ls
@@ -11,4 +11,7 @@ setlocal cinoptions+=t0
 setlocal colorcolumn=+1
 setlocal foldmethod=marker
 setlocal formatoptions+=j
+setlocal formatoptions-=c
+setlocal formatoptions-=o
+setlocal formatoptions-=r
 setlocal textwidth=80
