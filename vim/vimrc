@@ -23,7 +23,6 @@ set shortmess+=I
 set smartcase
 set splitbelow
 set splitright
-set statusline=%<%f\ %y[%{&fileencoding}][%{&fileformat}]\ %m%r%=%-14.(%l,%c%V%)\ %P
 
 set noexpandtab
 set shiftwidth=4
@@ -50,7 +49,6 @@ nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>set list!<CR>
 nnoremap <Leader>y "*y
 nnoremap <Leader>z <Cmd>set spell!<CR>
-nnoremap \\ <Cmd>Eval<CR>
 nnoremap j gj
 nnoremap k gk
 
