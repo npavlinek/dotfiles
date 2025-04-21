@@ -6,11 +6,13 @@ This is a repository for all of my personal configuration files.
 
 ## Installation
 
+### Linux
+
     ./install.sh
 
-WARNING: If running under MSYS2, make sure to set the `MSYS` environment
-variable to `winsymlinks:nativestrict`, otherwise symbolic links are going to be
-"emulated" by just copying files.
+### Windows (PowerShell)
+
+    .\install.ps1
 
 ## License
 
