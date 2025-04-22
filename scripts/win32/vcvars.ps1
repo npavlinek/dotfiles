@@ -1,18 +1,33 @@
-$VCVars_C = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat"
-$VCVars_D = "D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat"
+function Set-Environment([string]$EnvVariableFile) {
+	Get-Content "$EnvVariableFile" | Foreach-Object {
+		if ($_ -match "^(.*?)=(.*)$") {
+			Set-Content "env:\$($matches[1])" $matches[2]
+		}
+	}
+	Remove-Item "$EnvVariableFile"
+}
+
 $EnvVariableFile = "$env:temp\vcvars.txt"
 
-if (Test-Path "$VCVars_C" -PathType Leaf) {
-	cmd /c "call `"$VCVars_C`" x64 && set > `"$EnvVariableFile`""
-} elseif (Test-Path "$VCVars_D" -PathType Leaf) {
-	cmd /c "call `"$VCVars_D`" x64 && set > `"$EnvVariableFile`""
-} else {
-	throw "Could not find vcvarsall.bat"
-}
+foreach ($Edition in @('Enterprise', 'Professional', 'Community')) {
+	$VCVars_C = "C:\Program Files\Microsoft Visual Studio\2022\$Edition\VC\Auxiliary\Build\vcvarsall.bat"
+	$VCVars_D = "D:\Program Files\Microsoft Visual Studio\2022\$Edition\VC\Auxiliary\Build\vcvarsall.bat"
+	$Found = $false
 
-Get-Content "$EnvVariableFile" | Foreach-Object {
-	if ($_ -match "^(.*?)=(.*)$") {
-		Set-Content "env:\$($matches[1])" $matches[2]
+	if (Test-Path "$VCVars_C" -PathType Leaf) {
+		Write-Output "Using $VCVars_C"
+		cmd /c "call `"$VCVars_C`" x64 && set > `"$EnvVariableFile`""
+		$Found = $true
+	} elseif (Test-Path "$VCVars_D" -PathType Leaf) {
+		Write-Output "Using $VCVars_D"
+		cmd /c "call `"$VCVars_D`" x64 && set > `"$EnvVariableFile`""
+		$Found = $true
+	}
+
+	if ($Found) {
+		Set-Environment "$EnvVariableFile"
+		exit
 	}
 }
-Remove-Item "$EnvVariableFile"
+
+throw "Could not find vcvarsall.bat"
