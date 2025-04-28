@@ -24,10 +24,10 @@ set smartcase
 set splitbelow
 set splitright
 
-set noexpandtab
+set expandtab
 set shiftwidth=4
-set softtabstop=0
-set tabstop=4
+set softtabstop=4
+set tabstop=8
 
 if has("win32")
   set guicursor=a:block-Cursor
