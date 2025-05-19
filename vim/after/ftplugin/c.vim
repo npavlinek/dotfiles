@@ -1,9 +1,10 @@
 setlocal cindent
-setlocal cinoptions+=(s
+setlocal cinoptions+=:2
+setlocal cinoptions+==2
 setlocal cinoptions+=E-s
-setlocal cinoptions+=Ls
 setlocal cinoptions+=N-s
-setlocal cinoptions+=g0
+setlocal cinoptions+=g1
+setlocal cinoptions+=h1
 setlocal cinoptions+=j1
 setlocal cinoptions+=l1
 setlocal cinoptions+=t0

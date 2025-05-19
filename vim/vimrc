@@ -19,14 +19,15 @@ set lazyredraw
 set listchars=tab:>\ ,space:.
 set mouse=a
 set nojoinspaces
+set nowrap
 set shortmess+=I
 set smartcase
 set splitbelow
 set splitright
 
 set expandtab
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 set tabstop=8
 
 if has("win32")
