@@ -2,7 +2,8 @@
 " highlighting and other goodies.
 filetype plugin indent on
 
-syntax off
+" Enable syntax highlighting, overriding current color settings with defaults.
+syntax on
 
 set autoindent
 set autoread
@@ -30,7 +31,6 @@ endif
 let g:mapleader = " "
 let g:maplocalleader = "\\"
 let g:omni_sql_no_default_maps = 1
-let loaded_matchparen = 1
 
 " Make <Esc> exit insert mode in vertical block mode.
 inoremap <C-C> <Esc>
