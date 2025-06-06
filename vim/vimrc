@@ -16,7 +16,6 @@ set hidden
 set ignorecase
 set incsearch
 set lazyredraw
-set listchars=tab:>\ ,space:.
 set mouse=a
 set nojoinspaces
 set shortmess+=I
@@ -32,6 +31,12 @@ let g:mapleader = " "
 let g:maplocalleader = "\\"
 let g:omni_sql_no_default_maps = 1
 
+function! <SID>toggle_formatting()
+	setlocal listchars=tab:>\ ,space:.
+	setlocal list!
+	let &l:cc = &l:cc == 0 ? (&l:tw == 0 ? 81 : &l:tw + 1) : 0
+endfunction
+
 " Make <Esc> exit insert mode in vertical block mode.
 inoremap <C-C> <Esc>
 
@@ -41,7 +46,7 @@ nnoremap <Leader><Leader> <Cmd>nohlsearch<CR>
 nnoremap <Leader>P "*P
 nnoremap <Leader>e :edit $MYVIMRC<CR>
 nnoremap <Leader>p "*p
-nnoremap <Leader>q <Cmd>set list!<CR>
+nnoremap <Leader>q <Cmd>call <SID>toggle_formatting()<CR>
 nnoremap <Leader>y "*y
 nnoremap <Leader>z <Cmd>set spell!<CR>
 nnoremap j gj
