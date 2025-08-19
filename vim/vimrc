@@ -18,6 +18,7 @@ set incsearch
 set lazyredraw
 set mouse=a
 set nojoinspaces
+set nowrap
 set shortmess+=I
 set smartcase
 set splitbelow
@@ -39,7 +40,6 @@ let g:omni_sql_no_default_maps = 1
 function! <SID>toggle_formatting()
     setlocal listchars=tab:>\ ,space:.
     setlocal list!
-    let &l:cc = &l:cc == 0 ? (&l:tw == 0 ? 81 : &l:tw + 1) : 0
 endfunction
 
 " Make <Esc> exit insert mode in vertical block mode.
@@ -54,8 +54,10 @@ nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>call <SID>toggle_formatting()<CR>
 nnoremap <Leader>y "*y
 nnoremap <Leader>z <Cmd>set spell!<CR>
+nnoremap N Nzz
 nnoremap j gj
 nnoremap k gk
+nnoremap n nzz
 
 vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
 vnoremap <Leader>p "*p

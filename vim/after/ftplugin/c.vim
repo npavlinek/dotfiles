@@ -9,4 +9,5 @@ setlocal cinoptions+=l1
 setlocal cinoptions+=t0
 setlocal foldmethod=marker
 setlocal formatoptions+=j
+setlocal formatoptions-=c
 setlocal textwidth=80
