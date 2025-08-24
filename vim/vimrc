@@ -53,10 +53,8 @@ nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>call <SID>toggle_formatting()<CR>
 nnoremap <Leader>y "*y
 nnoremap <Leader>z <Cmd>set spell!<CR>
-nnoremap N Nzz
 nnoremap j gj
 nnoremap k gk
-nnoremap n nzz
 
 vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
 vnoremap <Leader>p "*p
