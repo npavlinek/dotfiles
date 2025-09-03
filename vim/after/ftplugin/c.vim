@@ -1,5 +1,7 @@
+call TabIndent(4)
+
 setlocal cindent
-setlocal cinoptions+=(s
+setlocal cinoptions+=:0
 setlocal cinoptions+=E-s
 setlocal cinoptions+=N-s
 setlocal cinoptions+=g0
