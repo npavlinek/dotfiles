@@ -13,6 +13,7 @@ set display=lastline
 set encoding=utf-8
 set fileformats=unix,dos,mac
 set hidden
+set hlsearch
 set ignorecase
 set incsearch
 set lazyredraw
@@ -31,6 +32,10 @@ set tabstop=8
 if has('win32')
     set guicursor=a:block-Cursor
 endif
+
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 
 let g:mapleader = " "
 let g:maplocalleader = "\\"
