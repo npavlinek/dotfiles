@@ -1,5 +1,4 @@
 vim.opt_local.cindent = true
-
 vim.opt_local.cinoptions:append({
     "(0",   -- Align function arguments to opening paren.
     ":0",   -- Don't indent switch case labels.
@@ -10,3 +9,5 @@ vim.opt_local.cinoptions:append({
     "l1",   -- Align switch case contents with label.
     "t0",   -- Don't indent function return, if on its own line.
 })
+
+vim.opt_local.textwidth = 80
