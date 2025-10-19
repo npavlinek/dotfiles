@@ -17,7 +17,7 @@ set incsearch
 set listchars=tab:>\ ,space:·
 set mouse=a
 set nojoinspaces
-set shortmess+=I
+set ruler
 set splitbelow
 set splitright
 
@@ -36,7 +36,7 @@ let g:omni_sql_no_default_maps = 1
 
 nnoremap <Leader><Leader> <Cmd>nohlsearch<CR>
 nnoremap <Leader>P "*P
-nnoremap <Leader>e :edit $MYVIMRC<CR>
+nnoremap <Leader>e <Cmd>edit $MYVIMRC<CR>
 nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>setlocal list!<CR>
 nnoremap <Leader>y "*y
