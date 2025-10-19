@@ -41,8 +41,6 @@ nnoremap <Leader>p "*p
 nnoremap <Leader>q <Cmd>setlocal list!<CR>
 nnoremap <Leader>y "*y
 nnoremap <Leader>z <Cmd>setlocal spell!<CR>
-nnoremap j gj
-nnoremap k gk
 
 vnoremap <Leader>p "*p
 vnoremap <Leader>s :sort<CR>
