@@ -1,7 +1,3 @@
-[core]
-	autocrlf = false
-[pull]
-	rebase = true
 [user]
 	name = Niko Pavlinek
 	email = niko.pavlinek@gmail.com
