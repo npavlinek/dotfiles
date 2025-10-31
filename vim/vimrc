@@ -35,16 +35,17 @@ let g:maplocalleader = "\\"
 let g:omni_sql_no_default_maps = 1
 
 nnoremap <Leader><Leader> <Cmd>nohlsearch<CR>
-nnoremap <Leader>P "*P
+nnoremap <Leader>P "+P
 nnoremap <Leader>e <Cmd>edit $MYVIMRC<CR>
-nnoremap <Leader>p "*p
+nnoremap <Leader>p "+p
 nnoremap <Leader>q <Cmd>setlocal list!<CR>
-nnoremap <Leader>y "*y
+nnoremap <Leader>y "+y
+nnoremap <Leader>yy "+yy
 nnoremap <Leader>z <Cmd>setlocal spell!<CR>
 
-vnoremap <Leader>p "*p
+vnoremap <Leader>p "+p
 vnoremap <Leader>s :sort<CR>
-vnoremap <Leader>y "*y
+vnoremap <Leader>y "+y
 
 augroup RestoreCursorPosition
     autocmd!
