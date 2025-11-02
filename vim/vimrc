@@ -3,6 +3,7 @@
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
+set background=dark
 syntax on
 
 set autoindent
