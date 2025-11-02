@@ -22,13 +22,8 @@ set ruler
 set splitbelow
 set splitright
 
-set expandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=8
-
 if has('win32')
-    set guicursor=a:block-Cursor
+	set guicursor=a:block-Cursor
 endif
 
 let g:mapleader = " "
@@ -49,14 +44,13 @@ vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "+y
 
 augroup RestoreCursorPosition
-    autocmd!
+	autocmd!
 
-    " Jump to the last known cursor position in a buffer. Taken from Vim's
-    " `defaults.vim`:
-    " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111
-    autocmd BufReadPost *
-    \   let line = line("'\"")
-    \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
-    \ |     execute "normal! g`\""
-    \ | endif
+	" Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`: https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111
+	autocmd BufReadPost *
+	\   let line = line("'\"")
+	\ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
+	\ |   execute "normal! g`\""
+	\ |   execute "normal! zz"
+	\ | endif
 augroup END
