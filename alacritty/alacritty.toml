@@ -2,5 +2,5 @@
 padding = { x = 2, y = 2 }
 
 [font]
-normal = { family = "Hack", style = "Regular" }
+normal = { family = "DejaVu Sans Mono", style = "Regular" }
 size = 11
