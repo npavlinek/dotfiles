@@ -1,4 +1,5 @@
-" Enable filetype support, supporting filetype-specific indentation, syntax highlighting and other goodies.
+" Enable filetype support, supporting filetype-specific indentation, syntax
+" highlighting and other goodies.
 filetype plugin indent on
 
 " Enable syntax highlighting, overriding current color settings with defaults.
@@ -8,6 +9,7 @@ syntax on
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set colorcolumn=+1
 set completeopt=
 set encoding=utf-8
 set fileformats=unix,dos,mac
@@ -18,21 +20,17 @@ set laststatus=2
 set listchars=tab:🢒\ ,space:·
 set mouse=a
 set nojoinspaces
-set number
 set ruler
 set splitbelow
 set splitright
 
-set expandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=8
-
 if has('win32')
-    set guicursor=a:block-Cursor
+	set guicursor=a:block-Cursor
 endif
 
-let g:mapleader = " "
+let c_no_curly_error = 1
+
+let g:mapleader = ' '
 let g:maplocalleader = "\\"
 let g:omni_sql_no_default_maps = 1
 
@@ -49,14 +47,18 @@ vnoremap <Leader>p "+p
 vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "+y
 
-augroup RestoreCursorPosition
-    autocmd!
+" Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`:
+" https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111
+function! s:RestoreCursorPosition()
+	let line = line("'\"")
+	if line >= 1 && line <= line('$') && &filetype !~# 'commit'
+	\ && index(['xxd', 'gitrebase'], &filetype) == -1
+		execute 'normal! g`"'
+		execute 'normal! zz'
+	endif
+endfunction
 
-    " Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`: https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111
-    autocmd BufReadPost *
-    \   let line = line("'\"")
-    \ | if line >= 1 && line <= line("$") && &filetype !~# "commit" && index(["xxd", "gitrebase"], &filetype) == -1
-    \ |     execute "normal! g`\""
-    \ |     execute "normal! zz"
-    \ | endif
+augroup restore_cursor_position
+	autocmd!
+	autocmd BufReadPost * call s:RestoreCursorPosition()
 augroup END
