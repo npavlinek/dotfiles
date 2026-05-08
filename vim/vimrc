@@ -37,6 +37,7 @@ set tabstop=8
 
 let c_no_curly_error = 1
 
+let &grepprg = 'grep -RIn $* .'
 let g:mapleader = ' '
 let g:maplocalleader = "\\"
 let g:omni_sql_no_default_maps = 1
@@ -47,11 +48,15 @@ nnoremap n nzz
 nnoremap <Leader><Leader> <Cmd>nohlsearch<CR>
 nnoremap <Leader>P "+P
 nnoremap <Leader>e <Cmd>edit $MYVIMRC<CR>
+nnoremap <Leader>f :silent grep<Space>
+nnoremap <Leader>g :silent grep <C-R><C-W><CR>
 nnoremap <Leader>p "+p
 nnoremap <Leader>q <Cmd>setlocal list!<CR>
 nnoremap <Leader>y "+y
 nnoremap <Leader>yy "+yy
 nnoremap <Leader>z <Cmd>setlocal spell!<CR>
+nnoremap [q <Cmd>cprev<CR>zz
+nnoremap ]q <Cmd>cnext<CR>zz
 
 vnoremap <Leader>p "+p
 vnoremap <Leader>s :sort<CR>
@@ -71,4 +76,8 @@ endfunction
 augroup restore_cursor_position
     autocmd!
     autocmd BufReadPost * call s:RestoreCursorPosition()
+augroup END
+
+augroup misc
+    autocmd QuickFixCmdPost [^l]* cwindow | redraw
 augroup END
