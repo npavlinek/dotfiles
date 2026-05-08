@@ -79,5 +79,6 @@ augroup restore_cursor_position
 augroup END
 
 augroup misc
+    autocmd!
     autocmd QuickFixCmdPost [^l]* cwindow | redraw
 augroup END
