@@ -12,6 +12,7 @@ set backspace=indent,eol,start
 set completeopt=
 set encoding=utf-8
 set fileformats=unix,dos,mac
+set fillchars+=eob:\ 
 set hidden
 set hlsearch
 set ignorecase
@@ -29,7 +30,6 @@ if has('win32')
 endif
 
 set autoindent
-set copyindent
 set expandtab
 set shiftwidth=4
 set softtabstop=4

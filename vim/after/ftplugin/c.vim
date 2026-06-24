@@ -1,4 +1,5 @@
 setlocal cindent
+setlocal cinoptions+=(0,Ws
 setlocal cinoptions+=:0     " No switch case label indentation.
 setlocal cinoptions+=E-s    " No C++ extern content indentation.
 setlocal cinoptions+=Ls
