@@ -1,0 +1,12 @@
+[[ $- != *i* ]] && return
+
+HISTCONTROL=ignoreboth:erasedups
+
+alias ls='ls --color=auto'
+PS1='\u@\h:\w\$ '
+
+mkdir_cd() {
+    local dir=$1
+    mkdir -p "$dir"
+    cd "$dir"
+}
