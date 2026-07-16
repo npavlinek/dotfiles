@@ -6,7 +6,14 @@ alias ls='ls --color=auto'
 PS1='\u@\h:\w\$ '
 
 mkdir_cd() {
-    local dir=$1
+    local dir="$1"
     mkdir -p "$dir"
     cd "$dir"
+}
+
+mv_file() {
+    local dir="$(dirname $1)"
+    local oldfile="$(basename $1)"
+    local newfile="$2"
+    mv "$dir/$oldfile" "$dir/$newfile"
 }
