@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.xaml set filetype=xml
+autocmd BufRead,BufNewFile *.xaml setfiletype xml.xaml
