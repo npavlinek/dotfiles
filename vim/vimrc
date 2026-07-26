@@ -21,6 +21,7 @@ set laststatus=0
 set listchars=tab:‣\ ,space:·
 set mouse=a
 set nojoinspaces
+set number
 set ruler
 set shortmess+=I
 set splitbelow
@@ -36,7 +37,6 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=8
 
-let c_functions = 1
 let c_no_curly_error = 1
 
 let &grepprg = 'grep -RIn $* .'
@@ -63,6 +63,10 @@ nnoremap ]q <Cmd>cnext<CR>zz
 vnoremap <Leader>p "+p
 vnoremap <Leader>s :sort<CR>
 vnoremap <Leader>y "+y
+
+cnoreabbrev Q q
+cnoreabbrev W w
+cnoreabbrev Wq wq
 
 " Jump to the last known cursor position in a buffer. Taken from Vim's `defaults.vim`:
 " https://github.com/vim/vim/blob/e978b4534a5e10471108259118c0ef791106fd92/runtime/defaults.vim#L111
