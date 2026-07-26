@@ -17,17 +17,17 @@ foreach ($Version in @('18', '2022')) {
 
 		if (Test-Path "$VCVars_C" -PathType Leaf) {
 			Write-Output "Using $VCVars_C"
-				cmd /c "call `"$VCVars_C`" x64 && set > `"$EnvVariableFile`""
-				$Found = $true
+			cmd /c "call `"$VCVars_C`" x64 && set > `"$EnvVariableFile`""
+			$Found = $true
 		} elseif (Test-Path "$VCVars_D" -PathType Leaf) {
 			Write-Output "Using $VCVars_D"
-				cmd /c "call `"$VCVars_D`" x64 && set > `"$EnvVariableFile`""
-				$Found = $true
+			cmd /c "call `"$VCVars_D`" x64 && set > `"$EnvVariableFile`""
+			$Found = $true
 		}
 
 		if ($Found) {
 			Set-Environment "$EnvVariableFile"
-				exit
+			exit
 		}
 	}
 }
