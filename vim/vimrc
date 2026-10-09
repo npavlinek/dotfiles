@@ -21,7 +21,7 @@ set laststatus=0
 set listchars=tab:‣\ ,space:·
 set mouse=a
 set nojoinspaces
-set number
+set nowildmenu
 set ruler
 set shortmess+=I
 set splitbelow
