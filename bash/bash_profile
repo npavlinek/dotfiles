@@ -1,7 +1,0 @@
-[ -f $HOME/.bashrc ] && . $HOME/.bashrc
-
-export EDITOR=vim
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-
-export PATH=$HOME/opt/dotnet-sdk-10.0.301:$PATH
-export PATH=$HOME/opt/scripts:$PATH
