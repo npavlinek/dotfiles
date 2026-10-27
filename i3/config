@@ -27,10 +27,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-#bindsym $mod+Return exec "xterm -bd black -rv -fn -misc-fixed-medium-*-*-*-15-*-*-*-*-*-*-*"
-#bindsym $mod+Return exec "xterm -bd black -rv -fa 'Berkeley Mono' -fs 11"
-#bindsym $mod+Return exec "xterm -bd black -rv -fa 'DejaVu Sans Mono' -fs 11"
-bindsym $mod+Return exec "xterm -bd black -rv -fa 'Input Mono' -fs 11"
+bindsym $mod+Return exec "x-terminal-emulator"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -92,6 +89,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+mouse_warping none
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
